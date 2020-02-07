@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" import="com.uniovi.sdi.* , java.util.List"%>
 <!DOCTYPE html PUBLIC"-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -20,7 +21,8 @@
 </head>
 <body>
 
-	<jsp:useBean id="contador" class="com.uniovi.sdi.Contador" scope = "application"/>
+	<jsp:useBean id="contador" class="com.uniovi.sdi.Contador"
+		scope="application" />
 	<jsp:setProperty name="contador" property="incremento" value="1" />
 
 	<!-- Barra de Navegacion superior -->
@@ -32,7 +34,7 @@
 			<li><a href="admin.jsp">Administrar Productos</a></li>
 		</ul>
 		<div class="nav navbar-right">
-			<jsp:getProperty name="contador" property="total"/>Visitas 
+			<jsp:getProperty name="contador" property="total" />Visitas
 		</div>
 	</div>
 	</nav>
@@ -40,22 +42,25 @@
 	<div class="container" id="contenedor-principal">
 		<h2>Productos</h2>
 		<div class="row ">
-			<%
-				List<Producto> listaProductos = new ProductosService().getProductos();
-				for (Producto producto : listaProductos) {
-			%><div class="col-xs-12 col-sm-6 col-md-4col-lg-3">
+			<jsp:useBean id="productosService"
+				class="com.uniovi.sdi.ProductosService" />
+			<c:forEach var="producto" begin="0" items="${productosService.productos}">
+				<div class="col-xs-12col-sm-6col-md-4col-lg-3">
 				<div>
-					<img src="<%=producto.getImagen()%>" />
-					<div><%=producto.getNombre()%></div>
-					<a href="incluirEnCarrito?producto=<%=producto.getNombre()%>
-				"
-						class="btn btn-default"><%=producto.getPrecio()%>€</a>
+					<img src="<c:out value="${producto.imagen}"/>" />
+					<div>
+						<c:out value="${producto.nombre}" />
+					</div>
+					<a
+						href="incluirEnCarrito?producto=<c:out value="${producto.nombre}"/>
+					"
+						class="btn btn-default"> <c:out value="${producto.precio}" />
+						€
+					</a>
 				</div>
-			</div>
-			<%
-				}
-			%>
 		</div>
+		</c:forEach>
+	</div>
 	</div>
 </body>
 </html>
