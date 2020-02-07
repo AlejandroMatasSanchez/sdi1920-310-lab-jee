@@ -20,7 +20,7 @@ public class ProductosService {
 		}
 		return productos;
 	}
-
+	
 	public void setNuevoProducto(Producto nuevoProducto) {
 		ObjectContainer db = null;
 		try {

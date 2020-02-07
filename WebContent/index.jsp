@@ -32,6 +32,7 @@
 			<li><a href="incluirEnCarrito">Carrito</a></li>
 			<li><a href="login.jsp">Login</a></li>
 			<li><a href="admin.jsp">Administrar Productos</a></li>
+			<li><a href="productos">Lista de Productos</a></li>
 		</ul>
 		<div class="nav navbar-right">
 			<jsp:getProperty name="contador" property="total" />Visitas
@@ -44,23 +45,24 @@
 		<div class="row ">
 			<jsp:useBean id="productosService"
 				class="com.uniovi.sdi.ProductosService" />
-			<c:forEach var="producto" begin="0" items="${productosService.productos}">
+			<c:forEach var="producto" begin="0"
+				items="${productosService.productos}">
 				<div class="col-xs-12col-sm-6col-md-4col-lg-3">
-				<div>
-					<img src="<c:out value="${producto.imagen}"/>" />
 					<div>
-						<c:out value="${producto.nombre}" />
-					</div>
-					<a
-						href="incluirEnCarrito?producto=<c:out value="${producto.nombre}"/>
+						<img src="<c:out value="${producto.imagen}"/>" />
+						<div>
+							<c:out value="${producto.nombre}" />
+						</div>
+						<a
+							href="incluirEnCarrito?producto=<c:out value="${producto.nombre}"/>
 					"
-						class="btn btn-default"> <c:out value="${producto.precio}" />
-						€
-					</a>
+							class="btn btn-default"> <c:out value="${producto.precio}" />
+							€
+						</a>
+					</div>
 				</div>
+			</c:forEach>
 		</div>
-		</c:forEach>
-	</div>
 	</div>
 </body>
 </html>

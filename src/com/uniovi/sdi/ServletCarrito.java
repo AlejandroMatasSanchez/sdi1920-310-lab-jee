@@ -40,6 +40,7 @@ public class ServletCarrito extends HttpServlet {
 			request.getSession().setAttribute("carrito", carrito);
 		}
 		String producto = request.getParameter("producto");
+
 		if (producto != null) {
 			insertarEnCarrito(carrito, producto);
 		}
